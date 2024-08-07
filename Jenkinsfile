@@ -5,9 +5,9 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-east-1'
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID') 
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        IMAGE_REPO_NAME = "online-exam"
+        IMAGE_REPO_NAME = "boardgame"
         IMAGE_TAG = "latest"
-        REPOSITORY_URI = "494043708686.dkr.ecr.us-east-1.amazonaws.com/online-exam"
+        REPOSITORY_URI = "654654434841.dkr.ecr.us-east-1.amazonaws.com/boardgame:latest"
     }
     
     stages {
@@ -18,7 +18,7 @@ pipeline {
                     def ecrAuthToken = sh(script: "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}", returnStdout: true).trim()
                     
                     
-                    sh "docker login -u AWS -p ${ecrAuthToken} 494043708686.dkr.ecr.us-east-1.amazonaws.com/online-exam"
+                    sh "docker login -u AWS -p ${ecrAuthToken} 654654434841.dkr.ecr.us-east-1.amazonaws.com/boardgame"
                     
                    
                 }
@@ -27,7 +27,7 @@ pipeline {
         
         stage('Cloning Git') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NaveenBNN99/online-examination-system.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NaveenBNN99/Boardgame.git']])
             }
         }
         
