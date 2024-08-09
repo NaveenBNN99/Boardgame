@@ -1,5 +1,5 @@
 pipeline {
-    agent {lable 'slave1'}
+    agent { label 'slave1' }  // Corrected spelling of 'label'
     
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -7,20 +7,15 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         IMAGE_REPO_NAME = "boardgame"
         IMAGE_TAG = "latest"
-        REPOSITORY_URI = "654654434841.dkr.ecr.us-east-1.amazonaws.com/boardgame:latest"
+        REPOSITORY_URI = "654654434841.dkr.ecr.us-east-1.amazonaws.com/boardgame"
     }
     
     stages {
         stage('Authenticate') {
             steps {
                 script {
-                    
                     def ecrAuthToken = sh(script: "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}", returnStdout: true).trim()
-                    
-                    
                     sh "docker login -u AWS -p ${ecrAuthToken} 654654434841.dkr.ecr.us-east-1.amazonaws.com/boardgame"
-                    
-                   
                 }
             }
         }
@@ -42,7 +37,7 @@ pipeline {
         stage('Building image') {
             steps {
                 script {
-                    dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                    def dockerImage = docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}")  // Corrected dockerImage declaration
                 }
             }
         }
@@ -76,3 +71,4 @@ pipeline {
         }
     }
 }
+
