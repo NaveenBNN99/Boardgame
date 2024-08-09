@@ -33,24 +33,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Building image') {
-            steps {
-                script {
-                    def dockerImage = docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}")  // Corrected dockerImage declaration
-                }
-            }
-        }
-        
-        stage('Pushing to ECR') {
-            steps {
-                script {
-                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:${IMAGE_TAG}"
-                    sh "docker push ${REPOSITORY_URI}:${IMAGE_TAG}"
-                }
-            }
-        }
-
         stage('Install kubectl') {
             steps {
                 script {
