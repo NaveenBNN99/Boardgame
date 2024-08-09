@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }  // Corrected spelling of 'label'
+    agent { label 'slave' }  // Corrected spelling of 'label'
     
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
