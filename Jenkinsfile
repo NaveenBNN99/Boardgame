@@ -1,5 +1,5 @@
 pipeline {
-    agent {lable'slave1'}
+    agent {lable 'slave1'}
     
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
