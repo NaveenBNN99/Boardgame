@@ -69,7 +69,7 @@ pipeline {
             steps {
                 script {
                     echo "Current PATH: ${env.PATH}"
-                    sh "aws eks update-kubeconfig --name boardgame"
+                    sh "aws eks update-kubeconfig --name Boardgame"
                     sh "kubectl apply -f deployment-service.yaml"
                 }
             }
