@@ -31,11 +31,10 @@ pipeline {
             }
         }
         
-        stage('Build with Gradle') {
+        stage('Build with mvn') {
             steps {
                 script {
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build'
+                    sh 'mvn clean package'
                 }
             }
         }
@@ -70,8 +69,8 @@ pipeline {
             steps {
                 script {
                     echo "Current PATH: ${env.PATH}"
-                    sh "aws eks update-kubeconfig --name myapp-eks-cluster"
-                    sh "kubectl apply -f deployment.yaml"
+                    sh "aws eks update-kubeconfig --name boardgame"
+                    sh "kubectl apply -f deployment-service.yaml"
                 }
             }
         }
